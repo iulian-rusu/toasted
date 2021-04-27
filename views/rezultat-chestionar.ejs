@@ -31,8 +31,14 @@
                 <% } %>
             </div>
             <% } %>
-            <label id="quiz-result">Răspunsuri corecte: <%= raspunsuriCorecte %></label>
-            <br />
             <input type="submit" value="Înapoi la chestionar">
+            <br />
+            <label id="quiz-result">
+                <% if(raspunsuriCorecte == intrebari.length) { %> 
+                    Felicitări!
+                <% } %>
+                Răspunsuri corecte: <%= raspunsuriCorecte %>.
+            </label>
+             
     </form>
 </div>

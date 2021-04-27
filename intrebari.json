@@ -1,0 +1,22 @@
+[
+	{
+		"intrebare": "Care e rolul unui toaster?",
+		"variante": ["Face toasturi", "Execută aplicații", "Încălzește apa", "Nu are niciun rol"],
+		"corect": 0
+	},
+	{
+		"intrebare": "În ce an a apărut primul toaster?",
+		"variante": ["1389", "1839", "1893", "1983"],
+		"corect": 2
+	},
+	{
+		"intrebare": "Ce putere consumă un toaster mediu?",
+		"variante": ["100 cai putere", "10 W", "100 W", "1.35962 cai putere"],
+		"corect": 3
+	},
+	{
+		"intrebare": "Unde puteți cumpăra cele mai bune toaster?",
+		"variante": ["Aici!", "Nu în alte magazine", "Pe toasted.com", "Toate variantele dinainte"],
+		"corect": -1
+	}
+]

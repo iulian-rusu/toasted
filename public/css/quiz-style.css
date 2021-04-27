@@ -1,0 +1,50 @@
+
+#quiz-div {
+    display: flex;
+    flex-direction: column;
+}
+
+#quiz-form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+#quiz-div #quiz-form>* {
+    margin-top: 20px;
+}
+
+#quiz-form * {
+    margin: 5px;
+}
+
+#quiz-form #quiz-title, #quiz-form input[type="submit"] {
+    align-self: center;
+}
+
+#quiz-form .question {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+#quiz-form .question-label {
+    margin-right: 20px;
+}
+
+#quiz-form .question-input {
+    margin-right: 0;
+}
+
+#quiz-form .question-label-correct {
+    color: var(--valid);
+}
+
+#quiz-form .question-label-wrong {
+    color: var(--invalid);
+}
+
+#quiz-result {
+    text-align: center;
+    align-self: center;
+    font-weight: bold;
+}
