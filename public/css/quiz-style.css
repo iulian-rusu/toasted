@@ -2,6 +2,7 @@
 #quiz-div {
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
 }
 
 #quiz-form {
@@ -22,8 +23,7 @@
     align-self: center;
 }
 
-#quiz-form .question {
-    margin-top: 20px;
+#quiz-form .question-statement {
     font-weight: bold;
 }
 
@@ -47,4 +47,15 @@
     text-align: center;
     align-self: center;
     font-weight: bold;
+}
+
+.question-answers {
+    display: flex;
+}
+
+@media screen and (max-width: 900px) {
+    .question-answers {
+        display: flex;
+        flex-direction: column;
+    }
 }

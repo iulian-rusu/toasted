@@ -8,28 +8,29 @@
     <title>Toasted</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/base-style.css" type="text/css">
     <link rel="stylesheet" href="css/quiz-style.css" type="text/css">
     <link rel="stylesheet" href="css/index-style.css" type="text/css">
 </head>
 
 <body>
+    <header class="styled-header">
+        <div class="logo-div">
+            <img src="images/toaster.png" alt="Logo" id="logo-img">
+            <h1 class="fancy-font">toasted.com</h1>
+        </div>
+        <div class="menu-div">
+            <a class="menu-link hoverable" href="/">Acasă</a></li>
+            <a class="menu-link hoverable" href="/chestionar">Chestionar</a></li>
+        </div>
+    </header>
     <div class="main-div">
-        <header class="styled-header">
-            <div class="logo-div">
-                <img src="images/toaster.png" alt="Logo" id="logo-img">
-                <h1>toasted.com</h1>
-            </div>
-            <div class="menu-div">
-                <a class="menu-link" href="/">Acasă</a></li>
-                <a class="menu-link" href="/chestionar">Chestionar</a></li>
-            </div>
-        </header>
         <%- body -%>
-        <footer class="styled-footer">
-            <p id="copyright">Copyright &copy; 2021 Iulian Rusu. All Rights Reserved.</p>
-        </footer>
     </div>
+    <footer class="styled-footer">
+        <p id="copyright">Copyright &copy; 2021 Iulian Rusu. All Rights Reserved.</p>
+    </footer>
 </body>
 
 </html>

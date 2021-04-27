@@ -1,14 +1,14 @@
 <div id="quiz-div">
     <form id="quiz-form" action="/chestionar">
-        <h3 id="quiz-title">Rezultate chestionar.</h3>
+        <h3 id="quiz-title">Rezultate</h3>
         <% let raspunsuriCorecte = 0; %>
         <% raspunsuri = JSON.parse(raspunsuri); %>
         <% for(let i = 0; i < intrebari.length; i++) { %>
             <div class="quiz-question">
-                <p class="question">
+                <p class="question-statement">
                     <%= intrebari[i].intrebare %>
                 </p>
-     
+                <div class="question-answers">
                 <% for(let j = 0; j < intrebari[i].variante.length; j++) { %>
                     <%
                         let answerType = "none";
@@ -24,11 +24,14 @@
                             }
                         }
                     %>
-                    <input disabled class="question-input" type="radio" id="question-<%= i %>-<%= j %>">
-                    <label class="question-label question-label-<%= answerType %>" for="question-<%= i %>-<%= j %>">
-                        <%= intrebari[i].variante[j] %>
-                    </label>
+                    <div>
+                        <input disabled class="question-input" type="radio" id="question-<%= i %>-<%= j %>">
+                        <label class="question-label question-label-<%= answerType %>" for="question-<%= i %>-<%= j %>">
+                            <%= intrebari[i].variante[j] %>
+                        </label>
+                    </div>
                 <% } %>
+                </div>
             </div>
             <% } %>
             <input type="submit" value="Înapoi la chestionar">
@@ -37,7 +40,7 @@
                 <% if(raspunsuriCorecte == intrebari.length) { %> 
                     Felicitări!
                 <% } %>
-                Răspunsuri corecte: <%= raspunsuriCorecte %>.
+                Răspunsuri corecte: <%= raspunsuriCorecte %> 
             </label>
              
     </form>

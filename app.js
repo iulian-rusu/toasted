@@ -30,4 +30,4 @@ app.post('/rezultat-chestionar', (req, res) => {
 	res.render('rezultat-chestionar', { intrebari: listaIntrebari, raspunsuri: JSON.stringify(req.body) });
 });
 
-app.listen(port, () => console.log(`Serverul rulează la adresa http://localhost:`));
+app.listen(port, () => console.log(`Serverul rulează la adresa http://localhost: ${port}`));
