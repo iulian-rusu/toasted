@@ -1,0 +1,38 @@
+<div id="quiz-div">
+    <form id="quiz-form" action="/chestionar">
+        <h3 id="quiz-title">Rezultate chestionar.</h3>
+        <% let raspunsuriCorecte = 0; %>
+        <% raspunsuri = JSON.parse(raspunsuri); %>
+        <% for(let i = 0; i < intrebari.length; i++) { %>
+            <div class="quiz-question">
+                <p class="question">
+                    <%= intrebari[i].intrebare %>
+                </p>
+     
+                <% for(let j = 0; j < intrebari[i].variante.length; j++) { %>
+                    <%
+                        let answerType = "none";
+          
+                        if(j.toString() == raspunsuri[`question-${i}`])
+                        {
+                            if(intrebari[i].corect == -1 || intrebari[i].corect == j) {
+                                ++raspunsuriCorecte;
+                                answerType = "correct";
+                            }
+                            else {
+                                answerType = "wrong";
+                            }
+                        }
+                    %>
+                    <input disabled class="question-input" type="radio" id="question-<%= i %>-<%= j %>">
+                    <label class="question-label question-label-<%= answerType %>" for="question-<%= i %>-<%= j %>">
+                        <%= intrebari[i].variante[j] %>
+                    </label>
+                <% } %>
+            </div>
+            <% } %>
+            <label id="quiz-result">Răspunsuri corecte: <%= raspunsuriCorecte %></label>
+            <br />
+            <input type="submit" value="Înapoi la chestionar">
+    </form>
+</div>

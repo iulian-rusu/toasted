@@ -1,0 +1,133 @@
+:root {
+    --bg-color: white;
+    --dark-color: black;
+    --valid: rgb(0, 170, 37);
+    --invalid: rgb(211, 0, 0);
+    --grey: rgb(51, 51, 51);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+}
+
+.logo-div {
+    display: flex;
+}
+
+.logo-div>*{
+    align-self: center;
+}
+
+.logo-div>h1 {
+    font-size: 350%;
+    color: var(--grey);
+}
+
+#logo-img {
+    width: 50px;
+    margin: 15px;
+}
+
+.main-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.styled-header {
+    display: flex;
+}
+
+.styled-header>* {
+    align-self: center;
+    margin: 15px;
+}
+
+.menu-link>a {
+    text-decoration: none;
+    color: var(--dark-color);
+}
+
+.styled-footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 35px;  
+    color: var(--bg-color);
+    background-color: var(--dark-color);
+}
+
+.styled-footer #copyright {
+    margin: 5px;
+    text-align: center;
+}
+
+#quiz-div {
+    display: flex;
+    flex-direction: column;
+}
+
+#quiz-form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+#quiz-div #quiz-form>* {
+    margin-top: 20px;
+}
+
+#quiz-form * {
+    margin: 5px;
+}
+
+#quiz-form .question {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+#quiz-form .question-label {
+    margin-right: 20px;
+}
+
+#quiz-form .question-input {
+    margin-right: 0;
+}
+
+#quiz-form .question-label-correct {
+    color: var(--valid);
+}
+
+#quiz-form .question-label-wrong {
+    color: var(--invalid);
+}
+
+input[type="submit"], input[type="button"]  {
+    border: 2px solid var(--dark-blue);;
+    background-color: transparent;
+    color: var(--dark-blue);
+    font-weight: bold;
+    border-radius: 2px;
+    width: 200px;
+    height: 35px;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover {
+    animation-name: button-anim;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes button-anim {
+    to {
+        background-color: var(--grey);
+        color: var(--bg-color);
+    }
+}
