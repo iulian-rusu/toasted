@@ -3,11 +3,7 @@ const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon')
 const path = require('path')
-
-
-
-
-const utility = require("./utility");
+const utility = require("./modules/utility");
 
 const app = express();
 
