@@ -15,7 +15,7 @@ app.use(expressLayouts);
 app.use(express.static('public'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')))
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')))
 
 let listaIntrebari;
 (async () => { listaIntrebari = await utility.asyncReadFile("intrebari.json"); })();
