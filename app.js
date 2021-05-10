@@ -7,8 +7,6 @@ const utility = require("./modules/utility");
 
 const app = express();
 
-const port = 6789;
-
 app.set('view engine', 'ejs');
 
 app.use(expressLayouts);
@@ -20,14 +18,26 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')))
 let listaIntrebari;
 (async () => { listaIntrebari = await utility.asyncReadFile("intrebari.json"); })();
 
-app.get('/', (req, res) => res.render("index"));
-
-app.get('/chestionar', (req, res) => {
-	res.render('chestionar', { intrebari: listaIntrebari });
+app.get('/', (req, res) => res.render("index", {
+	title: "Toasted",
+	styleList: ["index-style.css"]}));
+app.get('/chestionar', (req, res) => res.render('chestionar', { 
+	title: "Chestionar",
+	styleList: ["quiz-style.css"],
+	intrebari: listaIntrebari
+ }));
+app.get('/autentificare', (req, res) => res.render("autentificare", {
+	title: "Autentificare",
+	styleList: ["auth-style.css"],
+}));
+app.post('/rezultat-chestionar', (req, res) => res.render('rezultat-chestionar', {
+	title: "Rezultate",
+	styleList: ["quiz-style.css"],
+	intrebari: listaIntrebari, 
+	raspunsuri: JSON.stringify(req.body) }));
+app.post('/verificare-autentificare', (req, res) => {
+	res.redirect("/");
 });
 
-app.post('/rezultat-chestionar', (req, res) => {
-	res.render('rezultat-chestionar', { intrebari: listaIntrebari, raspunsuri: JSON.stringify(req.body) });
-});
-
+const port = 6789;
 app.listen(port, () => console.log(`Serverul rulează la adresa http://localhost: ${port}`));

@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toasted</title>
+    <title><%= title %></title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/base-style.css" type="text/css">
-    <link rel="stylesheet" href="css/quiz-style.css" type="text/css">
-    <link rel="stylesheet" href="css/index-style.css" type="text/css">
+    <% for(let i=0; i < styleList.length; ++i) { %>
+        <link rel="stylesheet" href="css/<%= styleList[i] %>">
+    <% } %>
 </head>
 
 <body>
@@ -22,6 +23,7 @@
         </div>
         <div class="menu-div">
             <a class="menu-link hoverable" href="/">Acasă</a></li>
+            <a class="menu-link hoverable" href="/autentificare">Autentificare</a></li>
             <a class="menu-link hoverable" href="/chestionar">Chestionar</a></li>
         </div>
     </header>

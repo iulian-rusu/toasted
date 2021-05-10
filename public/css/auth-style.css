@@ -1,0 +1,25 @@
+#auth-form {
+    margin: auto;
+    margin-top: 100px;
+    margin-top: 100px;
+    text-align: right;
+}
+
+#auth-form * {
+    margin: 5px;
+    padding: 5px;
+}
+
+#auth-form label {
+    text-align: center;
+    width: 100px;
+}
+
+#auth-form input {
+    width: 150px;
+    border: 2px solid var(--dark-color);
+}
+
+#auth-form input:focus {
+    outline: none;
+}
