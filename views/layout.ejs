@@ -24,13 +24,14 @@
         <div class="menu-div">
             <% if (session.user) { %>
                 Logat ca <span class="fancy-font"><%= session.user.username %> </span>
+                <a class="menu-link hoverable" href="/logout">Logout</a></li>
+            <% } else { %>
+                <a class="menu-link hoverable" href="/autentificare">Autentificare</a></li>
             <% } %>
             <a class="menu-link hoverable" href="/">Acasă</a></li>
-            <a class="menu-link hoverable" href="/autentificare">Autentificare</a></li>
+
             <a class="menu-link hoverable" href="/chestionar">Chestionar</a></li>
-            <% if (session.user) { %>
-                <a class="menu-link hoverable" href="/logout">Logout</a></li>
-            <% } %>
+  
         </div>
     </header>
     <div class="main-div">
