@@ -1,0 +1,18 @@
+[
+  {
+    "username": "test",
+    "password": "test",
+    "lastName": "Nume",
+    "firstName": "Prenume",
+    "email": "email@gmail.com",
+    "phone": "2312-2-31-23"
+  },
+  {
+    "username": "iulian",
+    "password": "iulian",
+    "lastName": "Rusu",
+    "firstName": "Iulian",
+    "email": "iulian.rusu2@student.tuiasi.ro",
+    "phone": "1231231231"
+  }
+]

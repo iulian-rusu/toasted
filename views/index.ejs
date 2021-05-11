@@ -1,5 +1,9 @@
 <div class="flex-column" id="index-div">
     <div id="welcome">
-        <h2>Bun venit la <span class="fancy-font">toasted.com</span></h2>
+        <% if (session.user) { %>
+            <h2>Bine ai venit, <span class="fancy-font"><%= session.user.firstName %> <%= session.user.lastName %></span> !</h2>
+        <% } else { %>
+            <h2>Bun venit la <span class="fancy-font">toasted.com</span></h2>
+        <% } %>
     </div>
 </div>
