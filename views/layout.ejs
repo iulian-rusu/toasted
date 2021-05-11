@@ -28,7 +28,7 @@
             <a class="menu-link hoverable" href="/">Acasă</a></li>
             <a class="menu-link hoverable" href="/autentificare">Autentificare</a></li>
             <a class="menu-link hoverable" href="/chestionar">Chestionar</a></li>
-            <% if (session.username) { %>
+            <% if (session.user) { %>
                 <a class="menu-link hoverable" href="/logout">Logout</a></li>
             <% } %>
         </div>
