@@ -63,7 +63,8 @@ app.post('/verificare-autentificare', (req, res) => {
 				email: u.email,
 				phone: u.phone,
 				firstName: u.firstName,
-				lastName: u.lastName
+				lastName: u.lastName,
+				basket: u.basket
 			};
 			res.redirect("/");
 			return;
@@ -72,9 +73,22 @@ app.post('/verificare-autentificare', (req, res) => {
 	res.cookie('error', 'Date invalide', {maxAge: 1000});
 	res.redirect("/autentificare");
 });
+app.get('/vizualizare-cos', (req,res)=>{
+	if(!req.session.user) {
+		res.cookie('error', 'Trebuie să fiți autentificați pentru această acțiune', {maxAge: 1000});
+		res.redirect("/autentificare");
+		return;
+	}
+	res.render('vizualizare-cos', { 
+		title: "Coșul meu",
+		session: req.session,
+		styleList: ["basket-style.css"],
+		basket: req.session.user.basket
+	 });
+});
 app.get('/logout', (req, res) => {
 	req.session.user = null;
-	res.redirect('/');
+	res.redirect('/autentificare');
 });
 const port = 6789;
 app.listen(port, () => console.log(`Serverul rulează la adresa http://localhost: ${port}`));

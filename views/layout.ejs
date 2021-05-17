@@ -18,27 +18,28 @@
 <body>
     <header class="styled-header">
         <div class="logo-div">
-            <img src="images/toaster.png" alt="Logo" id="logo-img">
+            <img src="images/favicon.png" alt="Logo" id="logo-img">
             <h1 class="fancy-font">toasted.com</h1>
         </div>
         <div class="menu-div">
             <% if (session.user) { %>
                 Logat ca <span class="fancy-font"><%= session.user.username %> </span>
+            <% } %>
+            <a class="menu-link hoverable" href="/">Acasă</a></li>
+            <a class="menu-link hoverable" href="/chestionar">Chestionar</a></li>
+            <% if (session.user) { %>
+                <a class="menu-link hoverable" href="/vizualizare-cos">Vizualizare coș</a></li>
                 <a class="menu-link hoverable" href="/logout">Logout</a></li>
             <% } else { %>
                 <a class="menu-link hoverable" href="/autentificare">Autentificare</a></li>
             <% } %>
-            <a class="menu-link hoverable" href="/">Acasă</a></li>
-
-            <a class="menu-link hoverable" href="/chestionar">Chestionar</a></li>
-  
         </div>
     </header>
     <div class="main-div">
         <%- body -%>
     </div>
     <footer class="styled-footer">
-        <p id="copyright">Copyright &copy; 2021 Iulian Rusu. All Rights Reserved.</p>
+        <p id="copyright">Copyright &copy; 2021 Iulian Rusu</p>
     </footer>
 </body>
 

@@ -15,6 +15,11 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: var(--dark-color);
+}
+
 .fancy-font {
     font-family: 'Krona One', sans-serif;
 }
@@ -47,7 +52,7 @@
 
 .logo-div>h1 {
     font-size: 250%;
-    color: var(--grey);
+    color: var(--dark-color);
 }
 
 #logo-img {
@@ -85,14 +90,8 @@
 }
 
 .menu-link {
-    text-decoration: none;
-    color: var(--dark-color);
     padding-left: 20px;
     padding-right: 20px;
-}
-
-.menu-link:hover {
-    border-bottom: 2px solid var(--dark-color);
 }
 
 .styled-footer {

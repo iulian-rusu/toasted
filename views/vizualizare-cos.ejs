@@ -1,0 +1,25 @@
+<div id="basket-div" class="flex-column">
+    <table id="basket-table">
+        <thead>
+            <th>Imagine</th>
+            <th>Produs</th>
+            <th>Cantitate</th>
+            <th>Preț</th>
+        </thead>
+        <tbody>
+            <% for(let i = 0; i< basket.length; ++i) {%>
+            <tr>
+                <td class="product-image-td">
+                    <img class="product-image" src="images/<%= basket[i].img %>" alt="imagine toaster">
+                </td>
+                <td><%= basket[i].name %></td>
+                <td><%= basket[i].quantity %></td>
+                <td><%= basket[i].price %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <% if (!basket.length) {%>
+        <p id="empty-message">Coșul este gol. Click <a href="/">aici</a> pentru a-l umple!</p>
+    <% } %>
+</div>
