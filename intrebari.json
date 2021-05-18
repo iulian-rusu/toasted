@@ -1,7 +1,7 @@
 [
 	{
-		"intrebare": "Care e scopul unui toaster?",
-		"variante": ["Face toasturi", "Execută aplicații", "Încălzește apa", "Nu are scop"],
+		"intrebare": "Ce face un toaster?",
+		"variante": ["Face toasturi", "Cafea", "Orice", "Nu face nimic"],
 		"corect": 0
 	},
 	{

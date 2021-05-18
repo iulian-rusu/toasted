@@ -7,10 +7,7 @@
             <h2>Bun venit la <span class="fancy-font">toasted.com</span></h2>
         <% } %>
     </div>
-    <div id="buttons">
-        <button onclick="request('/creare-bd', 'Baza de date creata', 'POST')">Creare BD</button>
-        <button onclick="request('/inserare-bd', 'Date inserate in baza de date', 'POST')">Incarcare BD</button>
-    </div>
+
     <div id="status">
         <p id="message"></p>
     </div>
@@ -21,7 +18,7 @@
                 <th>Produs</th>
                 <th>Denumire</th>
                 <th>Preț</th>
-                <th></th>
+                <th>Acțiuni</th>
             </thead>
             <tbody>
                 <% for(let i = 0; i< products.length; ++i) {%>
@@ -30,12 +27,23 @@
                         <img class="product-image" src="images/<%= products[i].img %>" alt="imagine toaster">
                     </td>
                     <td><%= products[i].name %></td>
-                    <td><%= products[i].price %></td>
-                    <td><% if(session.user) { %> <button onclick="addToBasket(<%= products[i].id %>)">Adauga la cos</button> <% } %></td>
+                    <td>$<%= products[i].price %></td>
+                    <td>
+                        <% if(session.user) { %> 
+                        <button onclick="addToBasket(<%= products[i].id %>)">Adaugă la coș</button> 
+                        <% } else { %>
+                        <a class="hoverable" href="/autentificare">Autentificați-vă</a>
+                        <% } %>
+                    </td>
                 </tr>
                 <% } %>
             </tbody>
         </table>
+    </div>
+    <% } else { %>
+    <div id="buttons">
+        <button onclick="request('/creare-bd', 'POST', () => insertMessage('Baza de date creată'))">Creare BD</button>
+        <button onclick="request('/inserare-bd', 'POST', () => window.location='/')">Încărcare BD</button>
     </div>
     <% } %>
 </div>

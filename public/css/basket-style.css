@@ -5,6 +5,7 @@
 
 #basket-table {
     border-collapse: collapse;
+    margin-bottom: 40px;
 }
 
 #basket-table * {
@@ -47,4 +48,10 @@
 
 #empty-message a {
     font-weight: bold;
+}
+
+#total-cost {
+    font-weight: bold;
+    color: var(--valid);
+    box-shadow: none !important;
 }

@@ -7,6 +7,7 @@
             <th>Preț</th>
         </thead>
         <tbody>
+            <% let total = 0; %>
             <% for(let i = 0; i< basket.length; ++i) {%>
             <tr>
                 <td class="product-image-td">
@@ -14,8 +15,17 @@
                 </td>
                 <td><%= basket[i].name %></td>
                 <td><%= basket[i].quantity %></td>
-                <td><%= basket[i].price %></td>
+                <td>$<%= basket[i].price %></td>
+                <% total += basket[i].quantity * basket[i].price; %>
             </tr>
+            <% } %>
+            <% if (basket.length) {%>
+                <tr id="total-cost">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>$<%= total %></td>
+                </tr>
             <% } %>
         </tbody>
     </table>

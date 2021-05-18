@@ -30,7 +30,7 @@ let listaIntrebari, listaUtilizatori;
 (async () => { listaUtilizatori = await utility.asyncReadFile("utilizatori.json"); })();
 
 app.get('/', (req, res) => {
-	if(db) {
+	if (db) {
 		db.getAllProducts(prods => {
 			res.render("index", {
 				session: req.session,
@@ -79,9 +79,9 @@ app.post('/verificare-autentificare', (req, res) => {
 				email: u.email,
 				phone: u.phone,
 				firstName: u.firstName,
-				lastName: u.lastName,
-				basket: u.basket
+				lastName: u.lastName
 			};
+			req.session.basket = [];
 			res.redirect("/");
 			return;
 		}
@@ -95,12 +95,11 @@ app.get('/vizualizare-cos', (req, res) => {
 		res.redirect("/autentificare");
 		return;
 	}
-	console.log(req.session.user.basket);
 	res.render('vizualizare-cos', {
 		title: "Coșul meu",
 		session: req.session,
 		styleList: ["basket-style.css"],
-		basket: req.session.user.basket
+		basket: req.session.basket
 	});
 });
 app.get('/logout', (req, res) => {
@@ -118,16 +117,23 @@ app.post('/inserare-bd', (req, res) => {
 	}
 });
 app.get('/adauga-cos', (req, res) => {
-	if(!req.session.user) {
+	if (!req.session.user) {
 		res.cookie('error', 'Trebuie să fiți autentificați pentru această acțiune', { maxAge: 1000 });
 		res.redirect("/autentificare");
 		return;
 	}
 	db.getOneProduct(req.query.id, rows => {
-		if(rows) {
+		if (rows) {
 			const prod = rows[0];
-			prod.quantity = 1;
-			req.session.user.basket.push(prod);
+			const existingProduct = req.session.basket.find(item => item.id === prod.id);
+			if (existingProduct) {
+				existingProduct.quantity++;
+			}
+			else {
+				prod.quantity = 1;
+				req.session.basket.push(prod);
+			}
+			res.sendStatus(200);
 		}
 	});
 });

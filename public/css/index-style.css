@@ -6,7 +6,11 @@
 }
 
 #buttons, #status {
-    margin-top: 50px;
+    margin-top: 20px;
+}
+
+#status {
+    height: 50px;
 }
 
 #products-div>* {

@@ -2,24 +2,40 @@ const sqlite3 = require("sqlite3");
 const products = [
     [
         "toaster1.png",
-        "Generic Toaster",
-        "250"
-    ],
-    [
-        "toaster4.png",
-        "Cool Toaster",
-        "250"
+        "Breville Die-Cast 2-Slice Smart Toaster",
+        "149"
     ],
     [
         "toaster2.png",
-        "Nice Toaster",
-        "250"
+        "Cuisinart Toaster, 4-Slice, Brushed Stainless",
+        "129"
     ],
     [
         "toaster3.png",
-        "Cheap Toaster",
-        "250"
+        "Hamilton Beach Extra Wide Slot Toaster",
+        "89"
+    ],
+    [
+        "toaster4.png",
+        "Cuisinart CPT-320P1 Extra Wide Slot Toaster",
+        "99"
+    ],
+    [
+        "toaster5.png",
+        "Zwilling Enfinigy Cool Touch",
+        "179"
+    ],
+    [
+        "toaster6.png",
+        "Cuisinart RBT-4900PCFR Stainless Steel",
+        "139"
+    ],
+    [
+        "toaster7.png",
+        "Oster 2 Slice, Bread, Bagel Toaster, Metallic Grey",
+        "139"
     ]
+
 ];
 
 class DB {
@@ -46,7 +62,6 @@ class DB {
         products.forEach(value => {
             self.db.run(`INSERT INTO products(img, name, price) VALUES(?, ?, ?)`, value, err => {
                 if (err) {
-                    console.log(err.message);
                     return;
                 }
                 console.log("Inserted products into database");
