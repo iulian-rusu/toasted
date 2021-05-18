@@ -14,4 +14,28 @@
     <div id="status">
         <p id="message"></p>
     </div>
+    <% if(products) { %>
+    <div id="products-div" class="flex-column">
+        <table id="products-table">
+            <thead>
+                <th>Produs</th>
+                <th>Denumire</th>
+                <th>Preț</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i< products.length; ++i) {%>
+                <tr>
+                    <td class="product-image-td">
+                        <img class="product-image" src="images/<%= products[i].img %>" alt="imagine toaster">
+                    </td>
+                    <td><%= products[i].name %></td>
+                    <td><%= products[i].price %></td>
+                    <td><% if(session.user) { %> <button onclick="addToBasket(<%= products[i].id %>)">Adauga la cos</button> <% } %></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <% } %>
 </div>

@@ -6,32 +6,7 @@
     "firstName": "Prenume",
     "email": "email@gmail.com",
     "phone": "2312-2-31-23",
-    "basket": [
-      {
-        "img": "toaster1.png",
-        "name": "Generic Toaster",
-        "quantity": 3,
-        "price": "$250"
-      },
-      {
-        "img": "toaster2.png",
-        "name": "Cheap Toaster",
-        "quantity": 1,
-        "price": "$120"
-      },
-      {
-        "img": "toaster3.png",
-        "name": "Cool Toaster",
-        "quantity": 1,
-        "price": "$450"
-      },
-      {
-        "img": "toaster5.png",
-        "name": "Cheapest Toaster",
-        "quantity": 2,
-        "price": "$50"
-      }
-    ]
+    "basket": []
   },
   {
     "username": "iulian",

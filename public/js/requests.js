@@ -13,3 +13,7 @@ function request(url, msg = "Success", method = "GET") {
 function insertMessage(msg) {
     document.getElementById("message").innerHTML = msg;
 }
+
+function addToBasket(id) {
+    request(`/adauga-cos?id=${id}`, "Produs adaugat");
+}
