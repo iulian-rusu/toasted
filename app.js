@@ -29,6 +29,31 @@ let listaIntrebari, listaUtilizatori;
 (async () => { listaIntrebari = await utility.asyncReadFile("intrebari.json"); })();
 (async () => { listaUtilizatori = await utility.asyncReadFile("utilizatori.json"); })();
 
+let blockedIPs = [];
+
+function isBlocked(ip) {
+	return blockedIPs.indexOf(ip) > -1;
+}
+
+function blockIP(ip, timeout) {
+	blockedIPs.push(ip);
+	setTimeout(() => blockedIPs = blockedIPs.filter(x => x != ip), timeout);
+}
+
+// middleware to check if session is blocked
+app.use((req, res, next) => {
+	const ip = req.ip || req.socket.remoteAddress;
+	if (isBlocked(ip)) {
+		res.render('blocked', {
+			session: req.session,
+			title: "Oops...",
+			styleList: ["blocked-style.css"]
+		});
+	} else {
+		next();
+	}
+});
+
 app.get('/', (req, res) => {
 	if (db) {
 		db.getAllProducts(prods => {
@@ -74,13 +99,8 @@ app.post('/verificare-autentificare', (req, res) => {
 	const password = req.body["password"];
 	for (const u of listaUtilizatori) {
 		if (u.username == username && u.password == password) {
-			req.session.user = {
-				username: u.username,
-				email: u.email,
-				phone: u.phone,
-				firstName: u.firstName,
-				lastName: u.lastName
-			};
+			req.session.user = Object.assign({}, u);
+			req.session.user.password = null;
 			req.session.basket = [];
 			res.redirect("/");
 			return;
@@ -104,6 +124,7 @@ app.get('/vizualizare-cos', (req, res) => {
 });
 app.get('/logout', (req, res) => {
 	req.session.user = null;
+	req.session.basket = null;
 	res.redirect('/autentificare');
 });
 app.post('/creare-bd', (req, res) => {
@@ -116,13 +137,19 @@ app.post('/inserare-bd', (req, res) => {
 		res.redirect('/');
 	}
 });
-app.get('/adauga-cos', (req, res) => {
+app.get('/add-basket', (req, res) => {
 	if (!req.session.user) {
 		res.cookie('error', 'Trebuie să fiți autentificați pentru această acțiune', { maxAge: 1000 });
 		res.redirect("/autentificare");
 		return;
 	}
-	db.getOneProduct(req.query.id, rows => {
+	const id = req.query.id;
+	if(!utility.isNumeric(id)) {
+		res.cookie('error', 'Date corupte în cerere', { maxAge: 1000 });
+		res.redirect("/");
+		return;
+	}
+	db.getOneProduct(id, rows => {
 		if (rows) {
 			const prod = rows[0];
 			const existingProduct = req.session.basket.find(item => item.id === prod.id);
@@ -136,6 +163,51 @@ app.get('/adauga-cos', (req, res) => {
 			res.sendStatus(200);
 		}
 	});
+});
+app.get('/admin', (req, res) => {
+	if (!req.session.user || req.session.user.type != 'admin') {
+		const ip = req.ip || req.socket.remoteAddress;
+		blockIP(ip, 10000);
+		res.redirect("/");
+		return;
+	}
+	res.render("admin", {
+		session: req.session,
+		title: "Administrare",
+		styleList: ["admin-style.css"]
+	});
+});
+app.post('/add-product', (req, res) => {
+	if (!req.session.user || req.session.user.type != 'admin') {
+		const ip = req.ip || req.socket.remoteAddress;
+		blockIP(ip, 10000);
+		res.redirect("/");
+		return;
+	}
+	if (!db) {
+		res.cookie('error', 'Baza de date nu a fost inițializată', { maxAge: 1000 });
+		res.redirect("/admin");
+		return;
+	}
+	try {
+		const name = utilizty.sanitizeInput(req.body.name);
+		const price = Number.parseInt(req.body.price);
+		const i = Math.ceil(Math.random() * 7); // random number from 1 to 7
+		const prod = {
+			name: name,
+			price: price,
+			img: `toaster${i}.png`
+		}
+		db.insertOne(prod, () => {
+			res.redirect("/admin");
+			return;
+		})
+	} catch {
+		res.cookie('error', 'Date corupte în cerere', { maxAge: 1000 });
+		res.redirect("/admin");
+		return;
+	}
+
 });
 
 const port = 6789;

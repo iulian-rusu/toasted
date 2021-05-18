@@ -64,11 +64,24 @@ class DB {
                 if (err) {
                     return;
                 }
-                console.log("Inserted products into database");
+                console.log("Inserted product into database");
                 console.log(value);
             });
         });
         callback();
+    }
+
+    insertOne(product, callback) {
+        const value = [product.img, product.name, product.price];
+        this.db.run(`INSERT INTO products(img, name, price) VALUES(?, ?, ?)`, value, err => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("Inserted product into database");
+                console.log(product);
+            }
+            callback();
+        });
     }
     
     getAllProducts(callback) {

@@ -29,6 +29,9 @@
             <a class="menu-link hoverable" href="/chestionar">Chestionar</a></li>
             <% if (session.user) { %>
                 <a class="menu-link hoverable" href="/vizualizare-cos">Vizualizare coș</a></li>
+                <% if (session.user.type == "admin") { %>
+                <a class="menu-link hoverable" href="/admin">Administrare</a></li>
+                <% } %>
                 <a class="menu-link hoverable" href="/logout">Logout</a></li>
             <% } else { %>
                 <a class="menu-link hoverable" href="/autentificare">Autentificare</a></li>

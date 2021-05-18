@@ -15,6 +15,11 @@
 		"corect": 3
 	},
 	{
+		"intrebare": "Cum se numea primul toaster?",
+		"variante": ["Mr. Toast", "El Tosto", "Zwilling Enfinigy", "John"],
+		"corect": 1
+	},
+	{
 		"intrebare": "Unde puteți cumpăra cele mai bune toaster?",
 		"variante": ["Aici!", "Nicăieri altundeva", "Pe toasted.com", "Toate variantele precedente"],
 		"corect": -1

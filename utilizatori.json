@@ -1,17 +1,19 @@
 [
   {
+    "type": "admin",
     "username": "admin",
     "password": "admin",
-    "lastName": "Sistem",
     "firstName": "Administrator",
+    "lastName": "",
     "email": "admin@toasted.com",
     "phone": "2312-2-31-23"
   },
   {
+    "type": "user",
     "username": "iulian",
     "password": "iulian",
-    "lastName": "Rusu",
     "firstName": "Iulian",
+    "lastName": "Rusu",
     "email": "iulian.rusu2@student.tuiasi.ro",
     "phone": "1231231231"
   }

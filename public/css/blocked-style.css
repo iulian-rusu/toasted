@@ -1,0 +1,8 @@
+#blocked-message {
+    margin-top: 30vh;
+}
+
+#blocked-message *{
+    margin: auto;
+    align-self: center;
+}

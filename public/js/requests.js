@@ -15,5 +15,5 @@ function insertMessage(msg) {
 }
 
 function addToBasket(id) {
-    request(`/adauga-cos?id=${id}`, "GET",  () => insertMessage('Produs adăugat'));
+    request(`/add-basket?id=${id}`, "GET",  () => insertMessage('Produs adăugat'));
 }

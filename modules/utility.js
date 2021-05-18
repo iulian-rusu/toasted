@@ -10,5 +10,13 @@ module.exports = {
                 resolve(JSON.parse(data));
             });
         });
+    },
+    sanitizeInput: input => {
+        return input.trim().replace("'", "\\'");
+    },
+    isNumeric: str => {
+    if (typeof str != "string")
+        return false
+    return !isNaN(str) && !isNaN(parseFloat(str)) 
     }
 };

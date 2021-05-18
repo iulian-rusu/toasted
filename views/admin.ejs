@@ -1,0 +1,14 @@
+<div id="insert-product-div" class="flex-column">
+    <h2>Bun venit la pagina de administrare</h2>
+    <h3>De aici adăugați produse noi în baza de date.</h3>
+    <form action="/add-product" method="POST" id="insert-product-form">
+        <label for="name">Denumire</label>
+        <input type="text" name="name" placeholder="denumire produs">
+        <br />
+        <label for="price">Preț</label>
+        <input type="number" name="price" placeholder="preț" value="50" min="1" max="9999">
+        <br />
+        <br />
+        <input type="submit" value="Adaugă">
+    </form>
+</div>
