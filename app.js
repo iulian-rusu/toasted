@@ -42,6 +42,7 @@ function blockIP(ip, timeout) {
 
 // middleware to check if session is blocked
 app.use((req, res, next) => {
+	res.locals.error = req.cookies['error'];
 	const ip = req.ip || req.socket.remoteAddress;
 	if (isBlocked(ip)) {
 		res.render('blocked', {
@@ -109,7 +110,7 @@ app.post('/verificare-autentificare', (req, res) => {
 	res.cookie('error', 'Date invalide', { maxAge: 1000 });
 	res.redirect("/autentificare");
 });
-app.get('/vizualizare-cos', (req, res) => {
+app.get('/basket', (req, res) => {
 	if (!req.session.user) {
 		res.cookie('error', 'Trebuie să fiți autentificați pentru această acțiune', { maxAge: 1000 });
 		res.redirect("/autentificare");

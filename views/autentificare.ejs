@@ -1,10 +1,4 @@
 <div id="auth-form-div" class="flex-column">
-        <% if (error) { %>
-            <div class="error-message">
-                    <span class="close-error-button" onclick="this.parentElement.style.display='none';">&times;</span>
-                    <%= error %>
-            </div>
-        <% } %>
     <form action="/verificare-autentificare" method="POST" id="auth-form">
         <label for="username">Utilizator</label>
         <input type="text" placeholder="utilizator" autocomplete="off" name="username">

@@ -22,31 +22,3 @@
 #auth-form input:focus {
     outline: none;
 }
-
-.error-message {
-    position: absolute;
-    padding: 15px;
-    max-width: 300px;
-    min-width: 200px;
-    margin-left: calc(50% - 150px);
-    margin-top: 200px;
-    z-index: 1000;
-    background-color: var(--invalid);
-    color: var(--bg-color);
-    border: 2px solid var(--invalid);
-}
-
-.close-error-button {
-    margin-left: 15px;
-    color: var(--bg-color);
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.close-error-button:hover {
-    color: var(--dark-color);
-}

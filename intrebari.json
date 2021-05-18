@@ -21,7 +21,7 @@
 	},
 	{
 		"intrebare": "Unde puteți cumpăra cele mai bune toaster?",
-		"variante": ["Aici!", "Nicăieri altundeva", "Pe toasted.com", "Toate variantele precedente"],
+		"variante": ["Aici", "Nu în alt loc", "Pe toasted.com", "Toate variantele precedente"],
 		"corect": -1
 	}
 ]

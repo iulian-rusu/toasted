@@ -28,7 +28,7 @@
             <a class="menu-link hoverable" href="/">Acasă</a></li>
             <a class="menu-link hoverable" href="/chestionar">Chestionar</a></li>
             <% if (session.user) { %>
-                <a class="menu-link hoverable" href="/vizualizare-cos">Vizualizare coș</a></li>
+                <a class="menu-link hoverable" href="/basket">Coș</a></li>
                 <% if (session.user.type == "admin") { %>
                 <a class="menu-link hoverable" href="/admin">Administrare</a></li>
                 <% } %>
@@ -39,6 +39,12 @@
         </div>
     </header>
     <div class="main-div">
+        <% if (error) { %>
+            <div class="error-message">
+                    <span class="close-error-button" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <%= error %>
+            </div>
+        <% } %>
         <%- body -%>
     </div>
     <footer class="styled-footer">
