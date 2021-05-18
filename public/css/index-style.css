@@ -4,3 +4,7 @@
     margin-top: 30vh;
     margin-bottom: 30vh;
 }
+
+#buttons, #status {
+    margin-top: 50px;
+}

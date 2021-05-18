@@ -108,7 +108,7 @@ a {
     text-align: center;
 }
 
-input[type="submit"], input[type="button"]  {
+input[type="submit"], input[type="button"], button  {
     border: 2px solid var(--dark-color);
     background-color: transparent;
     color: var(--dark-color);
@@ -118,7 +118,7 @@ input[type="submit"], input[type="button"]  {
     height: 35px;
 }
 
-input[type="submit"]:hover, input[type="button"]:hover {
+input[type="submit"]:hover, input[type="button"]:hover, button:hover {
     animation-name: button-anim;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
