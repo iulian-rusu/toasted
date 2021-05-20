@@ -1,8 +1,9 @@
+<script src="js/requests.js" type="text/javascript"></script>
 <div id="insert-product-div" class="flex-column">
     <h2>Bun venit la pagina de administrare</h2>
     <br />
     <h3>Adaugă produs în baza de date.</h3>
-    <form action="/add-product" method="POST" id="insert-product-form">
+    <form action="/product" method="POST" id="insert-product-form">
         <label for="name">Denumire</label>
         <input type="text" name="name" placeholder="denumire produs">
         <br />
@@ -13,3 +14,29 @@
         <input type="submit" value="Adaugă">
     </form>
 </div>
+<% if(products) { %>
+    <div id="products-div" class="flex-column">
+        <table id="products-table">
+            <thead>
+                <th>Produs</th>
+                <th>Denumire</th>
+                <th>Preț</th>
+                <th>Acțiuni</th>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i< products.length; ++i) {%>
+                <tr>
+                    <td class="product-image-td">
+                        <img class="product-image" src="images/<%= products[i].img %>" alt="imagine toaster">
+                    </td>
+                    <td><%= products[i].name %></td>
+                    <td>$<%= products[i].price %></td>
+                    <td>
+                        <button onclick="deleteProduct(<%= products[i].id %>)">Șterge</button> 
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+<% } %>

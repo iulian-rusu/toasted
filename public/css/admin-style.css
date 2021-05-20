@@ -1,3 +1,7 @@
+h2 {
+    color: var(--invalid);
+}
+
 #insert-product-div>* {
     margin: auto;
     margin-top: 20px;
@@ -17,6 +21,7 @@
 #insert-product-form input {
     width: 150px;
     border: 2px solid var(--dark-color);
+    margin-bottom: 20px;
 }
 
 #insert-product-form input:focus {

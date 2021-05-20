@@ -83,6 +83,15 @@ class DB {
             callback();
         });
     }
+
+    deleteOne(id, callback) {
+        this.db.run(`DELETE FROM products WHERE id=?`, id, err => {
+            if (err) {
+                console.log(err);
+            }
+            callback();
+        });
+    }
     
     getAllProducts(callback) {
         this.db.all("SELECT * FROM products", [], (err, rows) => {

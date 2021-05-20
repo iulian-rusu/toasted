@@ -61,7 +61,7 @@ app.get('/', (req, res) => {
 			res.render("index", {
 				session: req.session,
 				title: "Toasted",
-				styleList: ["index-style.css"],
+				styleList: ["index-style.css", "product-table-style.css"],
 				products: prods
 			});
 		})
@@ -172,13 +172,25 @@ app.get('/admin', (req, res) => {
 		res.redirect("/");
 		return;
 	}
-	res.render("admin", {
-		session: req.session,
-		title: "Administrare",
-		styleList: ["admin-style.css"]
-	});
+	if (db) {
+		db.getAllProducts(prods => {
+			res.render("admin", {
+				session: req.session,
+				title: "Administrare",
+				styleList: ["admin-style.css", "product-table-style.css"],
+				products: prods
+			});
+		})
+	} else {
+		res.render("admin", {
+			session: req.session,
+			title: "Administrare",
+			styleList: ["admin-style.css", "product-table-style.css"],
+			products: null
+		});
+	}
 });
-app.post('/add-product', (req, res) => {
+app.post('/product', (req, res) => {
 	const ip = req.ip || req.socket.remoteAddress;
 	if (!req.session.user || req.session.user.type != 'admin') {
 		blockIP(ip, 10000);
@@ -214,8 +226,30 @@ app.post('/add-product', (req, res) => {
 		res.redirect("/admin");
 		return;
 	}
-
 });
-
+app.delete("/product", (req, res) => {
+	const ip = req.ip || req.socket.remoteAddress;
+	if (!req.session.user || req.session.user.type != 'admin') {
+		blockIP(ip, 10000);
+		res.sendStatus(403);
+		return;
+	}
+	if (!db) {
+		res.cookie('error', 'Baza de date nu a fost inițializată', { maxAge: 1000 });
+		res.sendStatus(404);
+		return;
+	}
+	try {
+		const id = Number.parseInt(req.body.id);
+		db.deleteOne(id, () => {
+			res.sendStatus(200);
+			return;
+		})
+	} catch {
+		res.cookie('error', 'Date corupte în cerere', { maxAge: 1000 });
+		res.sendStatus(404);
+		return;
+	}
+});
 const port = 6789;
 app.listen(port, () => console.log(`Serverul rulează la adresa http://localhost: ${port}`));
