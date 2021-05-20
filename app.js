@@ -179,8 +179,8 @@ app.get('/admin', (req, res) => {
 	});
 });
 app.post('/add-product', (req, res) => {
+	const ip = req.ip || req.socket.remoteAddress;
 	if (!req.session.user || req.session.user.type != 'admin') {
-		const ip = req.ip || req.socket.remoteAddress;
 		blockIP(ip, 10000);
 		res.redirect("/");
 		return;
@@ -191,7 +191,13 @@ app.post('/add-product', (req, res) => {
 		return;
 	}
 	try {
-		const name = utilizty.sanitizeInput(req.body.name);
+		const name = utility.sanitizeInput(req.body.name);
+		if(!utility.validateName(name)) {
+			res.cookie('error', 'Injecție de cod detectată', { maxAge: 1000 });
+			blockIP(ip, 10000);
+			res.redirect("/");
+			return;
+		}
 		const price = Number.parseInt(req.body.price);
 		const i = Math.ceil(Math.random() * 7); // random number from 1 to 7
 		const prod = {

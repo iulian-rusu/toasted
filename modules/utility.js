@@ -1,4 +1,5 @@
 const fs = require('fs');
+const nameRegex = /^[^<>]+$/;
 
 module.exports = {
     asyncReadFile: filename => {
@@ -12,8 +13,9 @@ module.exports = {
         });
     },
     sanitizeInput: input => {
-        return input.trim().replace("'", "\\'");
+        return input.trim().split("'").join("\\'");
     },
+    validateName: name => nameRegex.test(name),
     isNumeric: str => {
     if (typeof str != "string")
         return false
