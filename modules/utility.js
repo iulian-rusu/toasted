@@ -16,6 +16,7 @@ module.exports = {
         return input.trim().split("'").join("\\'");
     },
     validateName: name => nameRegex.test(name),
+    getIP: req => req.ip || req.socket.remoteAddress,
     isNumeric: str => {
     if (typeof str != "string")
         return false

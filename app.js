@@ -7,6 +7,7 @@ const path = require('path')
 const session = require('express-session')
 const utility = require("./modules/utility");
 const DB = require("./modules/database");
+const { getIP } = require('./modules/utility');
 
 const app = express();
 let db = null;
@@ -29,7 +30,24 @@ let listaIntrebari, listaUtilizatori;
 (async () => { listaIntrebari = await utility.asyncReadFile("intrebari.json"); })();
 (async () => { listaUtilizatori = await utility.asyncReadFile("utilizatori.json"); })();
 
+const MAX_LOGIN_FAILS_SHORT = 3;
+const MAX_LOGIN_FAILS_LONG = 10;
+
 let blockedIPs = [];
+let failedLoginsShort = {}
+let failedLoginsLong = {}
+
+function addOrSet(obj, key, value = 1) {
+	if (obj[key]) {
+		obj[key] += value;
+	}
+	else {
+		obj[key] = value;
+	}
+}
+
+setInterval(() => failedLoginsShort = {}, 10_000); // up to 3 failed logins every 10 seconds
+setInterval(() => failedLoginsLong = {}, 120_000); // up to 10 failed logins every 2 minutes
 
 function isBlocked(ip) {
 	return blockedIPs.indexOf(ip) > -1;
@@ -43,7 +61,7 @@ function blockIP(ip, timeout) {
 // middleware to check if session is blocked
 app.use((req, res, next) => {
 	res.locals.error = req.cookies['error'];
-	const ip = req.ip || req.socket.remoteAddress;
+	const ip = utility.getIP(req);
 	if (isBlocked(ip)) {
 		res.render('blocked', {
 			session: req.session,
@@ -81,6 +99,12 @@ app.get('/chestionar', (req, res) => res.render('chestionar', {
 	intrebari: listaIntrebari
 }));
 app.get('/autentificare', (req, res) => {
+	if (failedLoginsShort[getIP(req)] >= MAX_LOGIN_FAILS_SHORT
+		|| failedLoginsLong[getIP(req)] >= MAX_LOGIN_FAILS_LONG) {
+		res.cookie('error', 'Prea multe autentificari esuate', { maxAge: 1000 });
+		res.redirect("/");
+		return;
+	}
 	res.render("autentificare", {
 		error: req.cookies['error'],
 		title: "Autentificare",
@@ -107,6 +131,9 @@ app.post('/verificare-autentificare', (req, res) => {
 			return;
 		}
 	}
+	addOrSet(failedLoginsShort, getIP(req));
+	addOrSet(failedLoginsLong, getIP(req));
+
 	res.cookie('error', 'Date invalide', { maxAge: 1000 });
 	res.redirect("/autentificare");
 });
@@ -145,7 +172,7 @@ app.get('/add-basket', (req, res) => {
 		return;
 	}
 	const id = req.query.id;
-	if(!utility.isNumeric(id)) {
+	if (!utility.isNumeric(id)) {
 		res.cookie('error', 'Date corupte în cerere', { maxAge: 1000 });
 		res.redirect("/");
 		return;
@@ -167,7 +194,7 @@ app.get('/add-basket', (req, res) => {
 });
 app.get('/admin', (req, res) => {
 	if (!req.session.user || req.session.user.type != 'admin') {
-		const ip = req.ip || req.socket.remoteAddress;
+		const ip = utility.getIP(req);
 		blockIP(ip, 10000);
 		res.redirect("/");
 		return;
@@ -191,7 +218,7 @@ app.get('/admin', (req, res) => {
 	}
 });
 app.post('/product', (req, res) => {
-	const ip = req.ip || req.socket.remoteAddress;
+	const ip = utility.getIP(req);
 	if (!req.session.user || req.session.user.type != 'admin') {
 		blockIP(ip, 10000);
 		res.redirect("/");
@@ -204,7 +231,7 @@ app.post('/product', (req, res) => {
 	}
 	try {
 		const name = utility.sanitizeInput(req.body.name);
-		if(!utility.validateName(name)) {
+		if (!utility.validateName(name)) {
 			res.cookie('error', 'Injecție de cod detectată', { maxAge: 1000 });
 			blockIP(ip, 10000);
 			res.redirect("/");
@@ -228,7 +255,7 @@ app.post('/product', (req, res) => {
 	}
 });
 app.delete("/product", (req, res) => {
-	const ip = req.ip || req.socket.remoteAddress;
+	const ip = utility.getIP(req);
 	if (!req.session.user || req.session.user.type != 'admin') {
 		blockIP(ip, 10000);
 		res.sendStatus(403);
@@ -251,5 +278,17 @@ app.delete("/product", (req, res) => {
 		return;
 	}
 });
+
+// called when the route is not defined above
+app.use((req, res) => {
+	blockIP(getIP(req), 3000);
+	res.render('blocked', {
+		session: req.session,
+		title: "Oops...",
+		styleList: ["blocked-style.css"],
+		error: 'Ați accesat o resursa invalida'
+	});
+});
+
 const port = 6789;
 app.listen(port, () => console.log(`Serverul rulează la adresa http://localhost: ${port}`));
