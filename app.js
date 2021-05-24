@@ -230,11 +230,10 @@ app.post('/product', (req, res) => {
 		return;
 	}
 	try {
-		const name = utility.sanitizeInput(req.body.name);
+		const name = req.body.name;
 		if (!utility.validateName(name)) {
-			res.cookie('error', 'Injecție de cod detectată', { maxAge: 1000 });
-			blockIP(ip, 10000);
-			res.redirect("/");
+			res.cookie('error', 'Numele conține caractere invalide', { maxAge: 1000 });
+			res.redirect("/admin");
 			return;
 		}
 		const price = Number.parseInt(req.body.price);
